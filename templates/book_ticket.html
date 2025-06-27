@@ -1,0 +1,38 @@
+{% extends "base.html" %}
+
+{% block content %}
+<h1 class="text-2xl font-bold mb-4">Book Ticket</h1>
+{% if error %}
+<div class="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded mb-4">
+    {{ error }}
+</div>
+{% endif %}
+<form method="POST">
+    <div class="mb-4">
+        <label class="block text-gray-700">Passenger</label>
+        <select name="passenger_id" required class="border rounded p-2 w-full">
+            {% for passenger in passengers %}
+            <option value="{{ passenger.id }}">{{ passenger.full_name }} ({{ passenger.passport_no }})</option>
+            {% endfor %}
+        </select>
+    </div>
+    <div class="mb-4">
+        <label class="block text-gray-700">Flight</label>
+        <select name="flight_id" required class="border rounded p-2 w-full">
+            {% for flight in flights %}
+            <option value="{{ flight.id }}">
+                {{ flight.flight_code }}: {{ flight.departure }} → {{ flight.destination }} 
+                ({{ flight.departure_time.strftime('%Y-%m-%d %H:%M') }})
+            </option>
+            {% endfor %}
+        </select>
+    </div>
+    <div class="mb-4">
+        <label class="block text-gray-700">Seat Number</label>
+        <input type="text" name="seat_no" required class="border rounded p-2 w-full">
+    </div>
+    <div>
+        <button type="submit" class="bg-blue-500 text-white px-4 py-2 rounded">Book Ticket</button>
+    </div>
+</form>
+{% endblock %}

@@ -1,0 +1,39 @@
+{% extends "base.html" %}
+
+{% block content %}
+<h1 class="text-2xl font-bold mb-4">Add Flight</h1>
+{% if error %}
+<div class="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded mb-4">
+    {{ error }}
+</div>
+{% endif %}
+<form method="POST">
+    <div class="mb-4">
+        <label class="block text-gray-700">Flight Code</label>
+        <input type="text" name="flight_code" required class="border rounded p-2 w-full">
+    </div>
+    <div class="mb-4">
+        <label class="block text-gray-700">Departure</label>
+        <input type="text" name="departure" required class="border rounded p-2 w-full">
+    </div>
+    <div class="mb-4">
+        <label class="block text-gray-700">Destination</label>
+        <input type="text" name="destination" required class="border rounded p-2 w-full">
+    </div>
+    <div class="mb-4">
+        <label class="block text-gray-700">Departure Time</label>
+        <input type="datetime-local" name="departure_time" required class="border rounded p-2 w-full">
+    </div>
+    <div class="mb-4">
+        <label class="block text-gray-700">Arrival Time</label>
+        <input type="datetime-local" name="arrival_time" required class="border rounded p-2 w-full">
+    </div>
+    <div class="mb-4">
+        <label class="block text-gray-700">Price</label>
+        <input type="number" step="0.01" name="price" required class="border rounded p-2 w-full">
+    </div>
+    <div>
+        <button type="submit" class="bg-blue-500 text-white px-4 py-2 rounded">Add Flight</button>
+    </div>
+</form>
+{% endblock %}

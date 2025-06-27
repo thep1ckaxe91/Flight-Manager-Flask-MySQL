@@ -1,0 +1,27 @@
+{% extends "base.html" %}
+
+{% block content %}
+<h1 class="text-2xl font-bold mb-4">Popular Routes</h1>
+<table class="min-w-full table-auto">
+    <thead class="bg-gray-200">
+        <tr>
+            <th class="px-4 py-2">Route</th>
+            <th class="px-4 py-2">Ticket Count</th>
+            <th class="px-4 py-2">Total Revenue</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for route in routes %}
+        <tr class="border-b">
+            <td class="px-4 py-2">{{ route.departure }} → {{ route.destination }}</td>
+            <td class="px-4 py-2">{{ route.ticket_count }}</td>
+            <td class="px-4 py-2">${{ route.total_revenue }}</td>
+        </tr>
+        {% else %}
+        <tr>
+            <td colspan="3" class="px-4 py-2 text-center">No data available.</td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+{% endblock %}

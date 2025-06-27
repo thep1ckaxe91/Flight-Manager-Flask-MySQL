@@ -1,0 +1,44 @@
+{% extends "base.html" %}
+
+{% block content %}
+<h1 class="text-2xl font-bold mb-4">Flights</h1>
+<div class="mb-4">
+    <form method="GET" class="flex space-x-4">
+        <input type="text" name="departure" placeholder="Departure" class="border p-2 rounded" value="{{ request.args.get('departure', '') }}">
+        <input type="text" name="destination" placeholder="Destination" class="border p-2 rounded" value="{{ request.args.get('destination', '') }}">
+        <input type="date" name="date" class="border p-2 rounded" value="{{ request.args.get('date', '') }}">
+        <button type="submit" class="bg-blue-500 text-white px-4 py-2 rounded">Filter</button>
+    </form>
+</div>
+<table class="min-w-full table-auto">
+    <thead class="bg-gray-200">
+        <tr>
+            <th class="px-4 py-2">Code</th>
+            <th class="px-4 py-2">Departure</th>
+            <th class="px-4 py-2">Destination</th>
+            <th class="px-4 py-2">Departure Time</th>
+            <th class="px-4 py-2">Arrival Time</th>
+            <th class="px-4 py-2">Price</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for flight in flights %}
+        <tr class="border-b">
+            <td class="px-4 py-2">{{ flight.flight_code }}</td>
+            <td class="px-4 py-2">{{ flight.departure }}</td>
+            <td class="px-4 py-2">{{ flight.destination }}</td>
+            <td class="px-4 py-2">{{ flight.departure_time.strftime('%Y-%m-%d %H:%M') }}</td>
+            <td class="px-4 py-2">{{ flight.arrival_time.strftime('%Y-%m-%d %H:%M') }}</td>
+            <td class="px-4 py-2">${{ flight.price }}</td>
+        </tr>
+        {% else %}
+        <tr>
+            <td colspan="6" class="px-4 py-2 text-center">No flights found.</td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+<div class="mt-4">
+    <a href="/flights/add" class="bg-green-500 text-white px-4 py-2 rounded">Add New Flight</a>
+</div>
+{% endblock %}
